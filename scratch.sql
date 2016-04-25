@@ -10,3 +10,5 @@ CREATE TABLE Entry (id INT AUTO_INCREMENT primary key);
 CREATE TABLE Test  (id INT AUTO_INCREMENT primary key);
 
 show tables;
+
+DROP TABLE Test;
