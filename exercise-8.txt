@@ -1,26 +1,11 @@
-CREATE DATABASE decodemtl_test;
 
-DELETE DATABASE decodemtl_test;
-DROP DATABASE decodemtl_test;
-show databases;
-
-CREATE TABLE Account (id INT AUTO_INCREMENT primary key);
-CREATE TABLE AddressBook (id INT AUTO_INCREMENT primary key, address VARCHAR(100));
-CREATE TABLE Entry (id INT AUTO_INCREMENT primary key);
-CREATE TABLE Test  (id INT AUTO_INCREMENT primary key);
-
-show tables;
-
-DROP TABLE Test;
-
-
-ALTER TABLE Account ADD COLUMN (email VARCHAR(255), password VARCHAR(40));
+> ALTER TABLE Account ADD COLUMN (email VARCHAR(255), password VARCHAR(40));
 Query OK, 0 rows affected (0.03 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
-describe Account;
+> describe Account;
 
-ALTER TABLE Account ADD COLUMN (createdOn DATETIME, modifiedOn DATETIME);
+> ALTER TABLE Account ADD COLUMN (createdOn DATETIME, modifiedOn DATETIME);
 Query OK, 0 rows affected (0.12 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
@@ -35,9 +20,6 @@ describe Account;
 | modifiedOn | datetime     | YES  |     | NULL    |                |
 +------------+--------------+------+-----+---------+----------------+
 5 rows in set (0.00 sec)
-
-
-
 
 
 // remove column address I created
@@ -97,10 +79,5 @@ Records: 0  Duplicates: 0  Warnings: 0
 
 
 
-
-
-
-
-
-
+done!
 
