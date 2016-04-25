@@ -1,0 +1,75 @@
+CREATE DATABASE hotel;
+USE hotel;
+CREATE TABLE Floor (floorId INT auto_increment PRIMARY KEY, floorNum VARCHAR(10));
+CREATE TABLE Rooms (roomId INT auto_increment PRIMARY KEY, roomNum VARCHAR(10), floorId INT, FOREIGN KEY (floorId) REFERENCES Floor(floorId));
+ALTER TABLE Rooms ADD COLUMN (maxOccupancy INT, withKitchen INT, type ENUM('rent', 'janitor closet', 'public laundry room','gym','other'));
+ALTER TABLE Rooms ADD COLUMN (windowNum INT, withCarpet ENUM('yes', 'no'));
+ALTER TABLE Rooms CHANGE withKitchen withKitchen ENUM('yes', 'no'); 
+ALTER TABLE Rooms ALTER COLUMN withKitchen SET DEFAULT 'no';
+
+CREATE TABLE Bookings (bookingId INT auto_increment PRIMARY KEY);
+CREATE TABLE Client (clientId INT auto_increment PRIMARY KEY, clientInfo VARCHAR(255));
+ALTER TABLE Bookings ADD COLUMN(clientId INT, FOREIGN KEY (clientId) REFERENCES Client(clientId));
+ALTER TABLE Bookings ADD COLUMN(dateArrive DATETIME, dateDepart DATETIME, guests INT, roomId INT, FOREIGN KEY (roomId) REFERENCES Rooms(roomId));
+
+mysql> show tables;
++-----------------+
+| Tables_in_hotel |
++-----------------+
+| Bookings        |
+| Client          |
+| Floor           |
+| Rooms           |
++-----------------+
+4 rows in set (0.00 sec)
+
+
+mysql> describe Bookings;
++------------+----------+------+-----+---------+----------------+
+| Field      | Type     | Null | Key | Default | Extra          |
++------------+----------+------+-----+---------+----------------+
+| bookingId  | int(11)  | NO   | PRI | NULL    | auto_increment |
+| clientId   | int(11)  | YES  | MUL | NULL    |                |
+| dateArrive | datetime | YES  |     | NULL    |                |
+| dateDepart | datetime | YES  |     | NULL    |                |
+| guests     | int(11)  | YES  |     | NULL    |                |
+| roomId     | int(11)  | YES  | MUL | NULL    |                |
++------------+----------+------+-----+---------+----------------+
+6 rows in set (0.01 sec)
+
+
+mysql> describe Client;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| clientId   | int(11)      | NO   | PRI | NULL    | auto_increment |
+| clientInfo | varchar(255) | YES  |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+
+mysql> describe Floor;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| floorId  | int(11)     | NO   | PRI | NULL    | auto_increment |
+| floorNum | varchar(10) | YES  |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+
+mysql> describe Rooms;
++--------------+-------------------------------------------------------------------+------+-----+---------+----------------+
+| Field        | Type                                                              | Null | Key | Default | Extra          |
++--------------+-------------------------------------------------------------------+------+-----+---------+----------------+
+| roomId       | int(11)                                                           | NO   | PRI | NULL    | auto_increment |
+| roomNum      | varchar(10)                                                       | YES  |     | NULL    |                |
+| floorId      | int(11)                                                           | YES  | MUL | NULL    |                |
+| maxOccupancy | int(11)                                                           | YES  |     | NULL    |                |
+| withKitchen  | enum('yes','no')                                                  | YES  |     | no      |                |
+| type         | enum('rent','janitor closet','public laundry room','gym','other') | YES  |     | NULL    |                |
+| windowNum    | int(11)                                                           | YES  |     | NULL    |                |
+| withCarpet   | enum('yes','no')                                                  | YES  |     | NULL    |                |
++--------------+-------------------------------------------------------------------+------+-----+---------+----------------+
+8 rows in set (0.00 sec)
+

@@ -130,3 +130,20 @@ ALTER TABLE Entry ADD FOREIGN KEY (chickenId) REFERENCES Chicken(id);
 ALTER TABLE Chicken ADD FOREIGN KEY (barnId) REFERENCES Barn(id);
 
 ALTER TABLE Chicken ADD COLUMN (breedId INT, FOREIGN KEY (breedId) REFERENCES Breed(breedId));
+
+
+CREATE DATABASE hotel;
+USE hotel;
+CREATE TABLE Floor (floorId INT auto_increment PRIMARY KEY, floorNum VARCHAR(10));
+CREATE TABLE Rooms (roomId INT auto_increment PRIMARY KEY, roomNum VARCHAR(10), floorId INT, FOREIGN KEY (floorId) REFERENCES Floor(floorId));
+ALTER TABLE Rooms ADD COLUMN (maxOccupancy INT, withKitchen INT, type ENUM('rent', 'janitor closet', 'public laundry room','gym','other'));
+ALTER TABLE Rooms ADD COLUMN (windowNum INT, withCarpet ENUM('yes', 'no'));
+ALTER TABLE Rooms CHANGE withKitchen withKitchen ENUM('yes', 'no'); 
+ALTER TABLE Rooms ALTER COLUMN withKitchen SET DEFAULT 'no';
+
+CREATE TABLE Bookings (bookingId INT auto_increment PRIMARY KEY);
+CREATE TABLE Client (clientId INT auto_increment PRIMARY KEY, clientInfo VARCHAR(255));
+ALTER TABLE Bookings ADD COLUMN(clientId INT, FOREIGN KEY (clientId) REFERENCES Client(clientId));
+ALTER TABLE Bookings ADD COLUMN(dateArrive DATETIME, dateDepart DATETIME, guests INT, roomId INT, FOREIGN KEY (roomId) REFERENCES Rooms(roomId));
+
+
