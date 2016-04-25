@@ -1,0 +1,5 @@
+CREATE DATABASE decodemtl_test
+CREATE DATABASE decodemtl_addressbook;
+
+2 new dbs created, verified using 
+show databases;
