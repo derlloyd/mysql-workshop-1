@@ -1,0 +1,27 @@
+$ mysql.ctl start
+
+Installing MySQL
+ * Stopping MySQL database server mysqld
+   ...done.
+ * Starting MySQL database server mysqld
+   ...done.
+ * Checking for tables which need an upgrade, are corrupt or were 
+not closed cleanly.
+
+MySQL 5.5 database added.  Please make note of these credentials:
+
+       Root User: derlloyd
+   Database Name: c9
+
+ * Starting MySQL database server mysqld
+   ...done.
+  
+  
+   
+$ mysql -u derlloyd
+
+Welcome to MySQL Moitor
+...
+
+
+>mysql
