@@ -1,0 +1,64 @@
+mysql> show tables;
++--------------------+
+| Tables_in_chickens |
++--------------------+
+| Barn               |
+| Breed              |
+| Chicken            |
+| Entry              |
++--------------------+
+4 rows in set (0.00 sec)
+
+
+mysql> describe Barn;
++---------+--------------+------+-----+---------+----------------+
+| Field   | Type         | Null | Key | Default | Extra          |
++---------+--------------+------+-----+---------+----------------+
+| id      | int(11)      | NO   | PRI | NULL    | auto_increment |
+| address | varchar(255) | YES  |     | NULL    |                |
+| owner   | varchar(255) | YES  |     | NULL    |                |
++---------+--------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+
+mysql> describe Breed;
++----------------+--------------+------+-----+---------+----------------+
+| Field          | Type         | Null | Key | Default | Extra          |
++----------------+--------------+------+-----+---------+----------------+
+| breedId        | int(11)      | NO   | PRI | NULL    | auto_increment |
+| plumage        | varchar(100) | YES  |     | NULL    |                |
+| color          | varchar(100) | YES  |     | NULL    |                |
+| comb_type      | varchar(100) | YES  |     | NULL    |                |
+| number_of_toes | int(11)      | YES  |     | NULL    |                |
++----------------+--------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+
+mysql> describe Chicken;
++-------------+-----------------------+------+-----+---------+----------------+
+| Field       | Type                  | Null | Key | Default | Extra          |
++-------------+-----------------------+------+-----+---------+----------------+
+| id          | int(11)               | NO   | PRI | NULL    | auto_increment |
+| type        | enum('male','female') | YES  |     | female  |                |
+| birthdate   | datetime              | YES  |     | NULL    |                |
+| deceaseDate | datetime              | YES  |     | NULL    |                |
+| barnId      | int(11)               | YES  | MUL | NULL    |                |
+| breedId     | int(11)               | YES  | MUL | NULL    |                |
++-------------+-----------------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+
+mysql> describe Entry;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| entryId    | int(11)      | NO   | PRI | NULL    | auto_increment |
+| date       | datetime     | YES  |     | NULL    |                |
+| eggsLaid   | int(11)      | YES  |     | NULL    |                |
+| weight     | int(11)      | YES  |     | NULL    |                |
+| otherEvent | varchar(255) | YES  |     | NULL    |                |
+| chickenId  | int(11)      | YES  | MUL | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+

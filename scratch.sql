@@ -94,13 +94,39 @@ Records: 0  Duplicates: 0  Warnings: 0
 12 rows in set (0.00 sec)
 
 
+> create database chickens;
+CREATE TABLE Barn (id INT auto_increment primary key, address VARCHAR(255), owner VARCHAR(255));
+
+mysql> describe Barn;
++---------+--------------+------+-----+---------+----------------+
+| Field   | Type         | Null | Key | Default | Extra          |
++---------+--------------+------+-----+---------+----------------+
+| id      | int(11)      | NO   | PRI | NULL    | auto_increment |
+| address | varchar(255) | YES  |     | NULL    |                |
+| owner   | varchar(255) | YES  |     | NULL    |                |
++---------+--------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+CREATE TABLE Chicken (id INT auto_increment primary key, foreign key(id) references Barn(id));
+
+SHOW CREATE TABLE Chicken;
+// display foreign key in table
+ALTER TABLE Chicken ADD COLUMN (type ENUM('male', 'female'), birthdate DATETIME, deceaseDate DATETIME);
+
+
+CREATE TABLE Breed (breedId INT auto_increment primary key, plumage VARCHAR(100), color VARCHAR(100), comb_type VARCHAR(100), number_of_toes INT);
+
+ALTER TABLE Chicken ADD COLUMN (foreign key(breedId) REFERENCES Breed(breedId));
+
+ALTER TABLE Chicken ALTER COLUMN type SET DEFAULT 'female';
+
+CREATE TABLE Entry (entryId INT auto_increment primary key, date DATETIME, eggsLaid INT, weight INT, otherEvent VARCHAR(255));
 
 
 
+ALTER TABLE Entry ADD FOREIGN KEY (chickenId) REFERENCES Chicken(id);
 
 
+ALTER TABLE Chicken ADD FOREIGN KEY (barnId) REFERENCES Barn(id);
 
-
-
-
-
+ALTER TABLE Chicken ADD COLUMN (breedId INT, FOREIGN KEY (breedId) REFERENCES Breed(breedId));
